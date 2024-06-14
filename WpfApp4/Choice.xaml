@@ -17,16 +17,113 @@
                 <Setter.Value >
                     <ControlTemplate TargetType="Button" >
                         <Border Background="{TemplateBinding Background}"   BorderThickness="2" BorderBrush="Black"  CornerRadius="3">
-                            <ContentPresenter  HorizontalAlignment="Center"  VerticalAlignment="Center" Content="회원가입"/>
+                            <ContentPresenter  HorizontalAlignment="Center"  VerticalAlignment="Center" Content="상담원연결"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style  x:Key="ButtonStyle2" TargetType="Button">
+            <Setter Property="Background" Value="#09aa5c" ></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button" >
+                        <Border Background="{TemplateBinding Background}"   BorderThickness="2" BorderBrush="Black"  CornerRadius="3">
+                            <ContentPresenter  HorizontalAlignment="Center"  VerticalAlignment="Center" Content="호선을 검색해도 Anything이란 문구만 나와요."/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style  x:Key="ButtonStyle3" TargetType="Button">
+            <Setter Property="Background" Value="#09aa5c" ></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button" >
+                        <Border Background="{TemplateBinding Background}"   BorderThickness="2" BorderBrush="Black"  CornerRadius="3">
+                            <ContentPresenter  HorizontalAlignment="Center"  VerticalAlignment="Center" Content="막차가 몇시에 오나요?"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style  x:Key="ButtonStyle4" TargetType="Button">
+            <Setter Property="Background" Value="#09aa5c" ></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button" >
+                        <Border Background="{TemplateBinding Background}"   BorderThickness="2" BorderBrush="Black"  CornerRadius="3">
+                            <ContentPresenter  HorizontalAlignment="Center"  VerticalAlignment="Center" Content="첫차가 몇시에 오나요?"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="123" TargetType="{x:Type ComboBox}">
+            <Setter Property="BorderBrush"
+            Value="Black" />
+            <Setter Property="BorderThickness"
+            Value="1" />
+            <Setter Property="MinWidth"
+            Value="120" />
+            <Setter Property="MinHeight"
+            Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <!-- 드롭다운 버튼 -->
+                            <ToggleButton IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                  Content="▼" HorizontalAlignment="Stretch"  >
+                                <!--<Border></Border>-->
+                                </ToggleButton>
+
+                            <!-- 선택된 아이템 표시 -->
+                            <ContentPresenter IsHitTestVisible="False"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      VerticalAlignment="Center"
+                                      Margin="5,0,0,0" />
+
+                            <!-- 드롭다운 메뉴 -->
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}"
+                           Placement="Bottom"
+                           PopupAnimation="Slide">
+                                <Grid  Width="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                              Background="White">
+                                    <Border  BorderBrush="Black"
+                                    BorderThickness="1,0,1,1">
+                                        <ScrollViewer>
+                                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="listviewstyle" TargetType="ListView">
+            <Setter Property="Background" Value="Azure"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+        
     </Page.Resources>
     <Grid Background="White">
-        <ComboBox x:Name="cb_1" HorizontalAlignment="Left" Height="32" Margin="182,37,0,0" VerticalAlignment="Top" Width="214" Text="원하는 호선을 선택해주세요." SelectionChanged="cb_1_SelectionChanged"/>
-        <ListView x:Name="liv_info" HorizontalAlignment="Left" Height="384" Margin="452,36,0,0" VerticalAlignment="Top" Width="514" d:ItemsSource="{d:SampleData ItemCount=5}" GridViewColumnHeader.Click="GridViewColumnHeader_Click">
+        <ComboBox  Style="{StaticResource 123}"  x:Name="cb_1" HorizontalAlignment="Left" Height="32" Margin="182,37,0,0" VerticalAlignment="Top" Width="214" Text="원하는 호선을 선택해주세요." SelectionChanged="cb_1_SelectionChanged">
+            <!--<ToggleButton BorderBrush="red"></ToggleButton>-->
+            <!--<ComboBoxItem></ComboBoxItem>-->
+        </ComboBox >
+        <ListView Style="{StaticResource listviewstyle}" x:Name="liv_info" HorizontalAlignment="Left" Height="384" Margin="452,36,0,0" VerticalAlignment="Top" Width="514" d:ItemsSource="{d:SampleData ItemCount=5}" GridViewColumnHeader.Click="GridViewColumnHeader_Click">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="현재위치" Width="100" DisplayMemberBinding="{Binding statnNm}"/>
@@ -41,10 +138,10 @@
 
         <TextBlock x:Name="txb_hosun" HorizontalAlignment="Left" Height="27" Margin="114,42,0,0" TextWrapping="Wrap" Text="호선 :" VerticalAlignment="Top" Width="52" FontSize="18"/>
         <TextBlock HorizontalAlignment="Left" Height="30" Margin="53,123,0,0" TextWrapping="Wrap" Text="자주묻는질문 :" VerticalAlignment="Top" Width="116" FontSize="16"/>
-        <Button x:Name="btn_go_CS" Content="상담원 연결"  HorizontalAlignment="Left" Height="49" Margin="44,356,0,0" VerticalAlignment="Top" Width="270" Click="btn_go_CS_Click" FontSize="18"/>
-        <Button x:Name="btn_first_station" Content="첫차가 몇시에 오나요?" HorizontalAlignment="Left" Height="33" Margin="44,158,0,0" VerticalAlignment="Top" Width="270" Click="btn_first_station_Click"/>
-        <Button x:Name="btn_last_btn" Content="막차가 몇시에 오나요?" HorizontalAlignment="Left" Height="32" Margin="44,217,0,0" VerticalAlignment="Top" Width="270" Click="btn_last_btn_Click"/>
-        <Button x:Name="btn_anything" Content="호선을 검색해도 Anything이란 문구만 나와요" HorizontalAlignment="Left" Height="34" Margin="44,273,0,0" VerticalAlignment="Top" Width="270" Click="btn_anything_Click"/>
+        <Button Style="{StaticResource ButtonStyle1}" x:Name="btn_go_CS" Content="상담원 연결"  HorizontalAlignment="Left" Height="49" Margin="44,356,0,0" VerticalAlignment="Top" Width="270" Click="btn_go_CS_Click" FontSize="18"/>
+        <Button Style="{StaticResource ButtonStyle4}" x:Name="btn_first_station" Content="첫차가 몇시에 오나요?" HorizontalAlignment="Left" Height="33" Margin="44,158,0,0" VerticalAlignment="Top" Width="270" Click="btn_first_station_Click"/>
+        <Button Style="{StaticResource ButtonStyle3}" x:Name="btn_last_btn" Content="막차가 몇시에 오나요?" HorizontalAlignment="Left" Height="32" Margin="44,217,0,0" VerticalAlignment="Top" Width="270" Click="btn_last_btn_Click"/>
+        <Button Style="{StaticResource ButtonStyle2}" x:Name="btn_anything" Content="호선을 검색해도 Anything이란 문구만 나와요" HorizontalAlignment="Left" Height="34" Margin="44,273,0,0" VerticalAlignment="Top" Width="270" Click="btn_anything_Click"/>
 
     </Grid>
 </Page>
